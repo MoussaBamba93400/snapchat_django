@@ -1,0 +1,41 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% tailwind_css %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Snapchat Clone{% endblock %}</title>
+    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-semibold text-blue-500">
+                <a href="/">Snapchat Clone</a>
+            </div>
+            <div class="space-x-4">
+                <a href="{% url 'login' %}" class="text-blue-500 hover:text-blue-700">Login</a>
+                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main class="flex justify-center items-center min-h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+            {% block content %}
+            <!-- Content will be injected here from register.html or login.html -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-center py-4 mt-8 shadow-inner">
+        <p class="text-gray-600 text-sm">&copy; 2024 Snapchat Clone. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
