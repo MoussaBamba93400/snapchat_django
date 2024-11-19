@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold text-center mb-5">Ajouter une Story</h1>
+    <div class="bg-white shadow rounded-lg p-6 max-w-md mx-auto">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Ajouter la story</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

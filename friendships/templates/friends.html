@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-8">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Liste des utilisateurs</h1>
+
+  <div class="bg-white shadow-md rounded-lg p-6">
+    {% if users %}
+      <ul class="divide-y divide-gray-200">
+        {% for item in users %}
+          <li class="flex items-center justify-between py-4">
+            <div class="flex items-center space-x-4">
+              <div class="text-lg font-medium text-gray-900">{{ item.user.username }}</div>
+            </div>
+            <div>
+              {% if item.is_friend %}
+                <span class="inline-block px-4 py-1 text-sm font-semibold text-white bg-green-500 rounded-full">
+                  Ami
+                </span>
+              {% else %}
+                <span class="inline-block px-4 py-1 text-sm font-semibold text-white bg-blue-500 rounded-full">
+                  Pas encore ami
+                </span>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center text-gray-600">Aucun utilisateur disponible.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

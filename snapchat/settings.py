@@ -150,3 +150,7 @@ AUTHENTICATION_BACKENDS = [
     'snapchat.authentication.EmailBackend',  # Use the custom email authentication backend
     'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as fallback
 ]
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

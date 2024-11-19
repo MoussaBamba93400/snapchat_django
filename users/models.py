@@ -1,19 +1,6 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
-
-class UserManager(BaseUserManager):
-    def create_user(self, username, password=None, **extra_fields):
-        if not username:
-            raise ValueError("Le nom d'utilisateur doit être défini")
-        user = self.model(username=username, **extra_fields)
-        user.set_password(password)  # Hash du mot de passe
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        return self.create_user(username, password, **extra_fields)
+from .managers import UserManager
 
 
 class User(AbstractBaseUser):
@@ -22,7 +9,8 @@ class User(AbstractBaseUser):
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=True)  # Pour l'authentification
+    is_active = models.BooleanField(default=True)  
+    friends = models.ManyToManyField('self', symmetrical=True, blank=True)
     
     objects = UserManager()
 
