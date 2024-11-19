@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
 from django.db import models
 
 class UserManager(BaseUserManager):
@@ -18,14 +18,16 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     username = models.CharField(max_length=255, unique=True)
+    email = models.EmailField(max_length=255, blank=True, unique=True)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    is_active = models.BooleanField(default=True)  # Pour l'authentification
+    
     objects = UserManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['password']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []  # Si vous avez des champs supplémentaires, vous pouvez les ajouter ici
 
     def __str__(self):
         return self.username

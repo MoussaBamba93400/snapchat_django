@@ -6,7 +6,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'email', 'password']
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -16,5 +16,5 @@ class UserRegistrationForm(forms.ModelForm):
         return user
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(max_length=255)
+    email = forms.EmailField(max_length=255)
     password = forms.CharField(widget=forms.PasswordInput())

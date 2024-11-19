@@ -143,3 +143,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TAILWIND_APP_NAME = 'theme'
+
+AUTH_USER_MODEL = 'users.User'
+
+AUTHENTICATION_BACKENDS = [
+    'snapchat.authentication.EmailBackend',  # Use the custom email authentication backend
+    'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as fallback
+]
