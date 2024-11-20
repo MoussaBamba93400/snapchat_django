@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .models import StorieView
 from .models import Story
 from .forms import StoryForm
 from friendships.models import Friendship
@@ -59,7 +60,12 @@ def story_view(request, user_id):
 
         if not stories:
             stories = []
-
+        else: 
+            story_views = []
+            for story in stories:
+                print('story',story.id)
+                story_views.append(StorieView(storie=story, viewer=request.user))
+            StorieView.objects.bulk_create(story_views)    
     except Story.DoesNotExist:
         raise Http404("No stories found for this user")
 

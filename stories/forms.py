@@ -6,7 +6,7 @@ class StoryForm(forms.ModelForm):
         model = Story
         fields = ['description', 'content_image']
         widgets = {
-            'description': forms.URLInput(attrs={
+            'description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Description de la story',
                 'style': 'width: 100%; margin-bottom: 10px;'
