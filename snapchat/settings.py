@@ -136,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -147,8 +148,8 @@ TAILWIND_APP_NAME = 'theme'
 AUTH_USER_MODEL = 'users.User'
 
 AUTHENTICATION_BACKENDS = [
-    'snapchat.authentication.EmailBackend',  # Use the custom email authentication backend
-    'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as fallback
+    'users.authentication.EmailBackend',  # Use the custom email authentication backend
+    #'django.contrib.auth.backends.ModelBackend',  # Keep the default backend as fallback
 ]
 
 

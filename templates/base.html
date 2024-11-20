@@ -24,15 +24,22 @@
                 {% elif page == 'stories' %}
                 <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
                 <a href="{% url 'friends' %}" class="text-blue-500 hover:text-blue-700">Friends</a>
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Add storie</a>
+                <a href="{% url 'add_story' %}" class="text-blue-500 hover:text-blue-700">Add storie</a>
                 <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
                 {% elif page == 'friends' %}
                 <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
                 <a href="{% url 'add_story' %}" class="text-blue-500 hover:text-blue-700">Add storie</a>
                 <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
                 <a href="{% url 'stories' %}" class="text-blue-500 hover:text-blue-700">Stories</a>
-
-                {% else %}
+                {% elif page == 'add_story' %}
+                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
+                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
+                <a href="{% url 'stories' %}" class="text-blue-500 hover:text-blue-700">Stories</a>
+                {% elif page == 'story' %}
+                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
+                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
+                <a href="{% url 'stories' %}" class="text-blue-500 hover:text-blue-700">Stories</a>
+                <a href="{% url 'logout' %}" class="text-blue-500 hover:text-blue-700">Logout</a>
                 {% endif %}
             </div>
         </div>

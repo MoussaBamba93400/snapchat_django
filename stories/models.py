@@ -4,7 +4,7 @@ from users.models import User
 class Story(models.Model):
     id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(User, related_name='stories', on_delete=models.CASCADE)
-    content_url = models.TextField()
+    description = models.TextField()
     content_image = models.ImageField(upload_to='stories/images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

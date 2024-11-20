@@ -23,11 +23,18 @@ def stories(request):
         else:
             friend_ids.add(friendship.sender_user_id)
     
-    stories = Story.objects.filter(user_id__in=friend_ids).order_by('-created_at')
+    latest_stories = Story.objects.filter(user_id__in=friend_ids).order_by('user_id', '-created_at')
 
-    message = "Aucune story publiée par vos amis pour le moment." if not stories.exists() else None
+    unique_stories = []
+    seen_users = set()
+    for story in latest_stories:
+        if story.user.id not in seen_users:
+            unique_stories.append(story)
+            seen_users.add(story.user.id)
+    
+    message = "Aucune story publiée par vos amis pour le moment." if not unique_stories else None
 
-    return render(request, 'stories.html', {'stories': stories, 'message': message, 'page': 'stories'})
+    return render(request, 'stories.html', {'stories': unique_stories, 'message': message, 'page': 'stories'})
 
 
 
@@ -36,11 +43,24 @@ def add_story(request):
     if request.method == 'POST' and request.FILES:
         form = StoryForm(request.POST, request.FILES)
         if form.is_valid():
-            # Assurez-vous d'associer l'utilisateur connecté à la story
-            story = form.save(commit=False)  # Ne sauvegarde pas encore
-            story.user = request.user  # Associe l'utilisateur connecté à la story
-            story.save()  # Sauvegarde la story avec l'utilisateur associé
-            return redirect('stories')  # Redirection après ajout
+            
+            story = form.save(commit=False) 
+            story.user = request.user  
+            story.save() 
+            return redirect('stories') 
     else:
         form = StoryForm()
-    return render(request, 'add_story.html', {'form': form})
+    return render(request, 'add_story.html', {'form': form, 'page': 'add_story'})
+
+@login_required
+def story_view(request, user_id):
+    try:
+        stories = Story.objects.filter(user_id=user_id).order_by('-created_at')
+
+        if not stories:
+            stories = []
+
+    except Story.DoesNotExist:
+        raise Http404("No stories found for this user")
+
+    return render(request, 'story.html', {'stories': stories, 'page': 'story'})

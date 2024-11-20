@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="text-3xl font-semibold mb-6">{{ page|capfirst }} Page</h1>
+
+    {% if stories %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for story in stories %}
+                <div class="bg-white border rounded-lg shadow-lg overflow-hidden">
+                    <!-- Story Image -->
+                    {% if story.content_image %}
+                        <div class="relative pb-56% bg-gray-200">
+                            <img src="{{ story.content_image.url }}" alt="Story image" class="absolute inset-0 w-full h-full object-cover">
+                        </div>
+                    {% else %}
+                        <div class="p-4 text-center text-gray-500">
+                            <p>No image available</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Story Description -->
+                    <div class="px-6 py-4">
+                        <p class="text-lg text-gray-800">{{ story.description }}</p>
+                    </div>
+
+                    <!-- Story Date -->
+                    <div class="px-6 py-2 bg-gray-50 text-sm text-gray-500">
+                        <p>Created on: {{ story.created_at|date:"F j, Y" }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-500">No stories available.</p>
+    {% endif %}
+{% endblock %}

@@ -1,19 +1,16 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<h1>Stories de vos amis</h1>
 
-{% block content %}
-  <h1>Stories de vos amis</h1>
-
-  {% if message %}
-    <p>{{ message }}</p>
-  {% else %}
-    <ul>
-      {% for story in stories %}
-        <li>
-          <strong>{{ story.user.username }}</strong>: 
-          <a href="{{ story.content_url }}" target="_blank">Voir la story</a>
-          <small>(publié le {{ story.created_at|date:"d/m/Y H:i" }})</small>
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endblock %}
+{% if message %}
+<p>{{ message }}</p>
+{% else %}
+<ul>
+  {% for story in stories %}
+  <li>
+    <strong>{{ story.user.username }}</strong>:
+    <a href="{% url 'story_view' story.user.id %}">Voir la story</a>
+    <small>(publié le {{ story.created_at|date:"d/m/Y H:i" }})</small>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %} {% endblock %}

@@ -4,7 +4,18 @@ from .models import Story
 class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
-        fields = ['content_url', 'content_image']
+        fields = ['description', 'content_image']
+        widgets = {
+            'description': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Description de la story',
+                'style': 'width: 100%; margin-bottom: 10px;'
+            }),
+            'content_image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'style': 'margin-top: 10px;'
+            }),
+        }
 
     def save(self, commit=True):
         story = super().save(commit=False)
