@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegistrationForm
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -40,3 +41,18 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+
+@login_required
+def profile_view(request):
+    user = request.user  # Récupère l'utilisateur connecté
+    return render(request, 'profile.html', {'user': user})
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()  # Supprime le compte utilisateur
+        messages.success(request, "Votre compte a été supprimé avec succès.")
+        return redirect('register')  # Redirige vers la page d'accueil ou une autre page
+    return render(request, 'delete_account.html')

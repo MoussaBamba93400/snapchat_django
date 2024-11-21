@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'snapchat.context_processors.navigation_menu'
             ],
         },
     },
@@ -155,3 +156,40 @@ AUTHENTICATION_BACKENDS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+NAVIGATION_MENU = {
+    'register': [
+        {'name': 'Login', 'url': 'login'},
+    ],
+    'login': [
+        {'name': 'Register', 'url': 'register'},
+    ],
+    'stories': [
+        {'name': 'Chats', 'url': 'register'},
+        {'name': 'Friends', 'url': 'friends'},
+        {'name': 'Add Story', 'url': 'add_story'},
+        {'name': 'Logout', 'url': 'logout'},
+        {'name': 'Profile', 'url': 'profile'},
+    ],
+    'friends': [
+        {'name': 'Chats', 'url': 'register'},
+        {'name': 'Add Story', 'url': 'add_story'},
+        {'name': 'Stories', 'url': 'stories'},
+        {'name': 'Logout', 'url': 'logout'},
+        {'name': 'Profile', 'url': 'profile'},
+    ],
+    'add_story': [
+        {'name': 'Chats', 'url': 'register'},
+        {'name': 'Account', 'url': 'register'},
+        {'name': 'Stories', 'url': 'stories'},
+        {'name': 'Logout', 'url': 'logout'},
+        {'name': 'Profile', 'url': 'profile'},
+    ],
+    'story': [
+        {'name': 'Chats', 'url': 'register'},
+        {'name': 'Account', 'url': 'register'},
+        {'name': 'Stories', 'url': 'stories'},
+        {'name': 'Logout', 'url': 'logout'},
+        {'name': 'Profile', 'url': 'profile'},
+    ],
+}

@@ -14,34 +14,48 @@
     <nav class="bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="text-xl font-semibold text-blue-500">
-                <a href="/">Snapchat Clone</a>
+                <a href="{% url 'stories' %}">Snapchat Clone</a>
             </div>
             <div class="space-x-4">
-                {% if page == 'register' %}
-                <a href="{% url 'login' %}" class="text-blue-500 hover:text-blue-700">Login</a>
-                {% elif page == 'login' %}
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Register</a>
+                {% if page == 'login'%}
+                {% for item in navigation_menu.login %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
+                {% elif page == 'register' %}
+                {% for item in navigation_menu.register %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
                 {% elif page == 'stories' %}
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
-                <a href="{% url 'friends' %}" class="text-blue-500 hover:text-blue-700">Friends</a>
-                <a href="{% url 'add_story' %}" class="text-blue-500 hover:text-blue-700">Add storie</a>
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
+                {% for item in navigation_menu.stories %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
                 {% elif page == 'friends' %}
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
-                <a href="{% url 'add_story' %}" class="text-blue-500 hover:text-blue-700">Add storie</a>
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
-                <a href="{% url 'stories' %}" class="text-blue-500 hover:text-blue-700">Stories</a>
+                {% for item in navigation_menu.friends %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
                 {% elif page == 'add_story' %}
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
-                <a href="{% url 'stories' %}" class="text-blue-500 hover:text-blue-700">Stories</a>
+                {% for item in navigation_menu.add_story %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
                 {% elif page == 'story' %}
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Chats</a>
-                <a href="{% url 'register' %}" class="text-blue-500 hover:text-blue-700">Account</a>
-                <a href="{% url 'stories' %}" class="text-blue-500 hover:text-blue-700">Stories</a>
-                <a href="{% url 'logout' %}" class="text-blue-500 hover:text-blue-700">Logout</a>
+                {% for item in navigation_menu.story %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
                 {% endif %}
             </div>
+            
         </div>
     </nav>
 
