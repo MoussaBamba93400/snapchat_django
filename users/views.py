@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.views import View
+from messaging.models import Message
+from friendships.models import Friendship
+from django.db.models import Q
 
 
 
@@ -49,9 +52,28 @@ class UserView(View):
 
 
   @login_required
-  def profile_view(request):
+  def profile_view(request): 
     user = request.user  # Récupère l'utilisateur connecté
-    return render(request, 'profile.html', {'user': user, 'page': 'profile'})
+    
+    # Statistiques sur les messages envoyés
+    sent_messages_count = Message.objects.filter(sender_user=user).count()
+    
+    # Statistiques sur les amis de l'utilisateur
+    friends_count = Friendship.objects.filter(
+        (Q(sender_user=user) | Q(recever_user=user)), approved=True
+    ).count()
+    
+    # Statistiques supplémentaires : messages reçus
+    received_messages_count = Message.objects.filter(recever_user=user).count()
+
+    # Passer ces statistiques au template
+    return render(request, 'profile.html', {
+        'user': user, 
+        'sent_messages_count': sent_messages_count,
+        'friends_count': friends_count,
+        'received_messages_count': received_messages_count,
+        'page': 'profile'
+    })
 
   @login_required
   def delete_account(request):

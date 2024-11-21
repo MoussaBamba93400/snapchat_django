@@ -165,28 +165,24 @@ NAVIGATION_MENU = {
         {'name': 'Register', 'url': 'register'},
     ],
     'stories': [
-        {'name': 'Chats', 'url': 'register'},
         {'name': 'amis', 'url': 'friends'},
         {'name': 'ajouter une story', 'url': 'add_story'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
     ],
     'friends': [
-        {'name': 'Chats', 'url': 'register'},
         {'name': 'ajouter une story', 'url': 'add_story'},
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
     ],
     'add_story': [
-        {'name': 'Chats', 'url': 'register'},
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
         {'name': 'amis', 'url': 'friends'},
     ],
     'story': [
-        {'name': 'Chats', 'url': 'register'},
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},

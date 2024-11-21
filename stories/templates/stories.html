@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% block content %}
-<h1>Stories de vos amis</h1>
+<div class="flex justify-center">
+  <h1>Stories de vos amis</h1>
+</div>
 
 {% if message %}
 <p>{{ message }}</p>
@@ -7,8 +9,10 @@
 <ul>
   {% for story in stories %}
   <li>
-    <strong>{{ story.user.username }}</strong>:
-    <a href="{% url 'story_view' story.user.id %}">Voir la story</a>
+    <div class="flex justify-center">
+    <strong>{{ story.user.username }}</strong>
+    </div>
+    <a class="bg-blue-500 text-center text-white mt-4 block rounded" href="{% url 'story_view' story.user.id %}">Voir la story</a>
     <small>(publié le {{ story.created_at|date:"d/m/Y H:i" }})</small>
   </li>
   {% endfor %}
