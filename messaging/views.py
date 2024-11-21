@@ -4,13 +4,13 @@ from django.db.models import Q
 from .models import Message
 from users.models import User
 from friendships.models import Friendship
-from django.views.decorators.csrf import csrf_exempt
-import json
-from django.http import JsonResponse
+from django.views import View
 
 
-@login_required
-def chat_view(request, friend_id):
+
+class MessageView(View):
+ @login_required
+ def chat_view(request, friend_id):
     current_user = request.user
     friend = get_object_or_404(User, id=friend_id)
 
@@ -52,7 +52,7 @@ def chat_view(request, friend_id):
 
 
  # Only use this if you're not using {% csrf_token %}, otherwise remove it
-def mark_message_as_viewed(request, friend_id):
+ def mark_message_as_viewed(request, friend_id):
         current_user = request.user
         friend = get_object_or_404(User, id=friend_id)
         messages = Message.objects.filter(
