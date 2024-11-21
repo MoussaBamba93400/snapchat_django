@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="text-3xl font-semibold mb-6">{{ page|capfirst }} Page</h1>
+    <h1 class="text-3xl font-semibold mb-6">{{ page|capfirst }} de {{ user }}</h1>
 
     {% if stories %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="">
             {% for story in stories %}
                 <div class="bg-white border rounded-lg shadow-lg overflow-hidden">
                     <!-- Story Image -->
                     {% if story.content_image %}
-                        <div class="relative pb-56% bg-gray-200">
-                            <img src="{{ story.content_image.url }}" alt="Story image" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="relative h-64 bg-gray-200">
+                            <img src="{{ story.content_image.url }}" alt="Story image" class="w-full h-full object-cover">
                         </div>
                     {% else %}
                         <div class="p-4 text-center text-gray-500">

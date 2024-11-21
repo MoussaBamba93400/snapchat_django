@@ -7,8 +7,6 @@
     <div class="bg-white p-6 rounded shadow-md">
       <p><strong>Nom d'utilisateur:</strong> {{ user.username }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Nom complet:</strong> {{ user.first_name }} {{ user.last_name }}</p>
-
       <a href="{% url 'delete_account' %}" class="text-red-600 mt-4 block">Supprimer mon compte</a>
     </div>
   </div>

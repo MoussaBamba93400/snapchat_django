@@ -7,6 +7,7 @@ from .forms import StoryForm
 from friendships.models import Friendship
 from django.shortcuts import redirect
 from django.views import View
+from users.models import User
 
 
 class StoryView(View):
@@ -60,7 +61,7 @@ class StoryView(View):
  def story_view(request, user_id):
     try:
         stories = Story.objects.filter(user_id=user_id).order_by('-created_at')
-
+        user = User.objects.get(id=user_id)
         if not stories:
             stories = []
         else: 
@@ -72,4 +73,4 @@ class StoryView(View):
     except Story.DoesNotExist:
         raise Http404("No stories found for this user")
 
-    return render(request, 'story.html', {'stories': stories, 'page': 'story'})
+    return render(request, 'story.html', {'stories': stories, 'user': user,  'page': 'story'})
