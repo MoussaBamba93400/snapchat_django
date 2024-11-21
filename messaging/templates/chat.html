@@ -3,16 +3,17 @@
 <div class="container mx-auto mt-8">
     <h1 class="text-2xl font-bold mb-4">Chat avec {{ friend.username }}</h1>
 
+    <a href="{% url 'mark_message_as_viewed' friend.id %}" class="text-blue-500 hover:text-blue-700">Retour</a>
     <!-- Zone de messages -->
     <div class="bg-gray-100 p-4 rounded-lg mb-4 max-h-96 overflow-y-auto">
         {% for message in messages %}
-        <div class="{% if message.sender_user == request.user %}text-right{% else %}text-left{% endif %} mb-2">
-            <div class="{% if message.sender_user == request.user %}bg-blue-500 text-white{% else %}bg-gray-300 text-black{% endif %} inline-block px-4 py-2 rounded-lg">
+        <div class="{% if message.sender_user == request.user.id %}text-right{% else %}text-left{% endif %} mb-2">
+            <div class="{% if message.sender_user == request.user.id %}bg-blue-500 text-white{% else %}bg-gray-300 text-black{% endif %} inline-block px-4 py-2 rounded-lg">
                 <p>{{ message.content }}</p>
                 <small class="text-sm">{{ message.created_at|date:"H:i" }}</small>
             </div>
         </div>
-        {% endfor %}
+        {% endfor %}        
     </div>
 
     <!-- Formulaire pour envoyer un message -->
