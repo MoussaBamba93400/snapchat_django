@@ -3,9 +3,14 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
+from django.views import View
 
 
-def register(request):
+
+
+
+class UserView(View):
+  def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         print(form.is_valid())
@@ -18,7 +23,7 @@ def register(request):
     return render(request, "register.html", {"form": form, "page": "register"})
 
 
-def login_view(request):
+  def login_view(request):
     if request.method == "POST":
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -38,18 +43,18 @@ def login_view(request):
     return render(request, "login.html", {"form": form, "page": "login"})
 
 
-def logout_view(request):
+  def logout_view(request):
     logout(request)
     return redirect("login")
 
 
-@login_required
-def profile_view(request):
+  @login_required
+  def profile_view(request):
     user = request.user  # Récupère l'utilisateur connecté
     return render(request, 'profile.html', {'user': user, 'page': 'profile'})
 
-@login_required
-def delete_account(request):
+  @login_required
+  def delete_account(request):
     if request.method == 'POST':
         user = request.user
         user.delete()  # Supprime le compte utilisateur
