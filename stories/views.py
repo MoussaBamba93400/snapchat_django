@@ -6,9 +6,12 @@ from .models import Story
 from .forms import StoryForm
 from friendships.models import Friendship
 from django.shortcuts import redirect
+from django.views import View
 
-@login_required
-def stories(request):
+
+class StoryView(View):
+ @login_required
+ def stories(request):
     user = request.user
 
     friendships = Friendship.objects.filter(
@@ -39,8 +42,8 @@ def stories(request):
 
 
 
-@login_required
-def add_story(request):
+ @login_required
+ def add_story(request):
     if request.method == 'POST' and request.FILES:
         form = StoryForm(request.POST, request.FILES)
         if form.is_valid():
@@ -53,8 +56,8 @@ def add_story(request):
         form = StoryForm()
     return render(request, 'add_story.html', {'form': form, 'page': 'add_story'})
 
-@login_required
-def story_view(request, user_id):
+ @login_required
+ def story_view(request, user_id):
     try:
         stories = Story.objects.filter(user_id=user_id).order_by('-created_at')
 
