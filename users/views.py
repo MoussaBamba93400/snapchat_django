@@ -46,7 +46,7 @@ def logout_view(request):
 @login_required
 def profile_view(request):
     user = request.user  # Récupère l'utilisateur connecté
-    return render(request, 'profile.html', {'user': user})
+    return render(request, 'profile.html', {'user': user, 'page': 'profile'})
 
 @login_required
 def delete_account(request):
@@ -55,4 +55,4 @@ def delete_account(request):
         user.delete()  # Supprime le compte utilisateur
         messages.success(request, "Votre compte a été supprimé avec succès.")
         return redirect('register')  # Redirige vers la page d'accueil ou une autre page
-    return render(request, 'delete_account.html')
+    return render(request, 'delete_account.html', {'page': 'delete_account'})
