@@ -59,6 +59,12 @@
                         {{ item.name }}
                     </a>
                 {% endfor %}
+                {% elif page == 'my_stories' %}
+                {% for item in navigation_menu.my_stories %}
+                    <a href="{% url item.url %}" class="text-blue-500 hover:text-blue-700">
+                        {{ item.name }}
+                    </a>
+                {% endfor %}
                 {% endif %}
             </div>
             

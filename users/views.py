@@ -53,25 +53,24 @@ class UserView(View):
 
   @login_required
   def profile_view(request): 
-    user = request.user  # Récupère l'utilisateur connecté
+    user = request.user 
     
-    # Statistiques sur les messages envoyés
     sent_messages_count = Message.objects.filter(sender_user=user).count()
     
-    # Statistiques sur les amis de l'utilisateur
     friends_count = Friendship.objects.filter(
         (Q(sender_user=user) | Q(recever_user=user)), approved=True
     ).count()
     
-    # Statistiques supplémentaires : messages reçus
     received_messages_count = Message.objects.filter(recever_user=user).count()
+    
+    stories_count = user.stories.count()
 
-    # Passer ces statistiques au template
     return render(request, 'profile.html', {
         'user': user, 
         'sent_messages_count': sent_messages_count,
         'friends_count': friends_count,
         'received_messages_count': received_messages_count,
+        'stories_count': stories_count,
         'page': 'profile'
     })
 

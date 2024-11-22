@@ -169,28 +169,39 @@ NAVIGATION_MENU = {
         {'name': 'ajouter une story', 'url': 'add_story'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
+        {'name': 'mes stories', 'url': 'my_stories'},
     ],
     'friends': [
         {'name': 'ajouter une story', 'url': 'add_story'},
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
+        {'name': 'mes stories', 'url': 'my_stories'},
     ],
     'add_story': [
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
         {'name': 'amis', 'url': 'friends'},
+        {'name': 'mes stories', 'url': 'my_stories'},
     ],
     'story': [
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'profile', 'url': 'profile'},
         {'name': 'amis', 'url': 'friends'},
+        {'name': 'mes stories', 'url': 'my_stories'},
     ],
     'profile': [
         {'name': 'stories', 'url': 'stories'},
         {'name': 'déconnexion', 'url': 'logout'},
         {'name': 'amis', 'url': 'friends'},
+        {'name': 'mes stories', 'url': 'my_stories'},
     ],
+    'my_stories': [
+        {'name': 'stories', 'url': 'stories'},
+        {'name': 'déconnexion', 'url': 'logout'},
+        {'name': 'profile', 'url': 'profile'},
+        {'name': 'amis', 'url': 'friends'},
+    ]
 }

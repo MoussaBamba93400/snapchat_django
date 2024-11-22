@@ -78,3 +78,11 @@ class StoryView(View):
         raise Http404("No stories found for this user")
 
     return render(request, 'story.html', {'stories': stories, 'user': user,  'page': 'story'})
+
+ @login_required
+ def my_stories(request):
+    user = request.user
+    time_threshold = now() - timedelta(hours=24)
+    stories = user.stories.all().filter(created_at__gte=time_threshold).order_by('-created_at')
+    
+    return render(request, 'user_stories.html', {'stories': stories, 'page': 'my_stories'})
