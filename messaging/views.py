@@ -27,7 +27,6 @@ class MessageView(View):
     if not is_friend:
         return redirect("user_list")
 
-    # Fetch the messages to display
     messages = Message.objects.filter(
     (Q(sender_user=current_user, recever_user=friend) & Q(viewed=False)) |
     (Q(sender_user=friend, recever_user=current_user) & Q(viewed=False))
@@ -51,7 +50,7 @@ class MessageView(View):
     return render(request, "chat.html", context)
 
 
- # Only use this if you're not using {% csrf_token %}, otherwise remove it
+ @login_required
  def mark_message_as_viewed(request, friend_id):
         current_user = request.user
         friend = get_object_or_404(User, id=friend_id)
@@ -59,4 +58,4 @@ class MessageView(View):
             sender_user=friend, recever_user=current_user, viewed=False
         )
         messages.update(viewed=True)
-        return redirect('stories')
+        return redirect('friends')
