@@ -83,3 +83,8 @@ class UserView(View):
         messages.success(request, "Votre compte a été supprimé avec succès.")
         return redirect('register')  # Redirige vers la page d'accueil ou une autre page
     return render(request, 'delete_account.html', {'page': 'delete_account'})
+  
+  def root_view(request):
+    if request.user.is_authenticated:
+        return redirect('stories')
+    return redirect('login')  

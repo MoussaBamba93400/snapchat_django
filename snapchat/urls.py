@@ -29,7 +29,8 @@ urlpatterns = [
     path('messaging/', include('messaging.urls')),
     path('stories/', include('stories.urls')),
     path('friendships/', include('friendships.urls')),
-    path('accounts/login/', UserView.login_view, name='login')
+    path('accounts/login/', UserView.login_view, name='login'),
+    path('', UserView.root_view, name='root')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

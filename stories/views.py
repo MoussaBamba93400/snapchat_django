@@ -8,6 +8,8 @@ from friendships.models import Friendship
 from django.shortcuts import redirect
 from django.views import View
 from users.models import User
+from datetime import timedelta
+from django.utils.timezone import now
 
 
 class StoryView(View):
@@ -28,7 +30,9 @@ class StoryView(View):
         else:
             friend_ids.add(friendship.sender_user_id)
     
-    latest_stories = Story.objects.filter(user_id__in=friend_ids).order_by('user_id', '-created_at')
+    time_threshold = now() - timedelta(hours=24)
+    
+    latest_stories = Story.objects.filter(user_id__in=friend_ids, created_at__gte=time_threshold).order_by('user_id', '-created_at')
 
     unique_stories = []
     seen_users = set()
