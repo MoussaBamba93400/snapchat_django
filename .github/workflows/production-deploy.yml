@@ -27,12 +27,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_KEY }}
           HOST: ${{ secrets.AWS_EC2_HOST }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i "$SSH_PRIVATE_KEY" ubuntu@$HOST << EOF
-            cd /path/to/your/app
-            git pull origin main
-            source /path/to/venv/bin/activate
-            pip install -r requirements.txt
-            python manage.py migrate
-            python manage.py collectstatic --noinput
-            sudo systemctl restart gunicorn
-          EOF
+         echo "$SSH_PRIVATE_KEY"
